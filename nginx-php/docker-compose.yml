@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   web:
-    image: nginx:1.19.2
+    image: nginx:1.19.5
     ports:
       - 80:80
     volumes:
@@ -12,6 +12,7 @@ services:
       - php
 
   php:
-    image: php:7.3-fpm
+    image: php:7.4-fpm
     volumes:
       - ./html:/var/www/html/
+      - ./php-config/custom.ini:/usr/local/etc/php/conf.d/custom.ini
