@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libcurl4-openssl-dev \
+    zip \
     libzip-dev
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
