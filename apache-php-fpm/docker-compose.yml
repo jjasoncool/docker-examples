@@ -22,9 +22,8 @@ services:
       - php
     links:
       - php
-    ports:
-      - "80:80"
-      - "443:443"
+    expose:
+      - "80"
     volumes:
       - ${CODE_PATH}:/var/www/html/
       - apache-config:/usr/local/apache2/conf/
@@ -47,3 +46,8 @@ volumes:
       o: 'bind'
       device: './config/apache/'
     external: false
+
+networks:
+    default:
+        external:
+            name: sk_service
