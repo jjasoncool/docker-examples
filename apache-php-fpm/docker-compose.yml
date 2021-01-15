@@ -10,6 +10,7 @@ services:
       - TZ=Asia/Taipei
     volumes:
       - ${CODE_PATH}:/var/www/html/
+      - ${FILE_PATH}:/webitems/
       - php-config:/usr/local/etc/
     container_name: "${PHP_NAME}"
     restart: always
