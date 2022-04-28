@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+    gitlab:
+        image: gitlab/gitlab-ce:${VERSION}
+        environment:
+            GITLAB_OMNIBUS_CONFIG: |
+              external_url "https://${DOMAIN}"
+              letsencrypt['enable'] = false
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+          - ./config:/etc/gitlab
+          - ./logs:/var/log/gitlab
+          - ./data:/var/opt/gitlab
+        container_name: "${NAME}"
+        restart: always
+        hostname: ${DOMAIN}
+        extra_hosts:
+          - "${DOMAIN}:${HOST_IP}"
+
+networks:
+    default:
