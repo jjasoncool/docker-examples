@@ -3,13 +3,16 @@ version: "3.9"
 services:
     gitlab:
         image: gitlab/gitlab-ce:${VERSION}
+        # external_url 為 server 產生網址對外顯示的位址，如信件連結、倉庫連結等
         environment:
             GITLAB_OMNIBUS_CONFIG: |
               external_url "https://${DOMAIN}"
               letsencrypt['enable'] = false
+              gitlab_rails['gitlab_shell_ssh_port'] = 2224
         ports:
             - "80:80"
             - "443:443"
+            - "2224:22"
         volumes:
           - ./config:/etc/gitlab
           - ./logs:/var/log/gitlab
@@ -19,6 +22,7 @@ services:
         hostname: ${DOMAIN}
         extra_hosts:
           - "${DOMAIN}:${HOST_IP}"
+        shm_size: '2048m'
 
 networks:
     default:
